@@ -33,7 +33,7 @@ const allowedOrigins = ['https://celadon-granita-83913d.netlify.app'];
 
 // CORS options
 const corsOptions = {
-	origin: allowedOrigins,
+	origin: 'https://celadon-granita-83913d.netlify.app',
 	methods: ['GET', 'POST', 'PUT', 'DELETE'],
 	allowedHeaders: ['Content-Type', 'Authorization'],
 	credentials: true
