@@ -29,11 +29,18 @@ const app = express();
 app.use(express.json());  // Parse incoming JSON data in the request body
 app.use(morgan('dev'));   // Configure logging of HTTP requests in development mode
 
+const allowedOrigins = ['https://6622bd02cfeeb51390a14018--celadon-granita-83913d.netlify.app', 'http://localhost:3000'];
+
+// CORS options
+const corsOptions = {
+	origin: allowedOrigins,
+	methods: ['GET', 'POST', 'PUT', 'DELETE'],
+	allowedHeaders: ['Content-Type', 'Authorization'],
+	credentials: true
+  };
+
 app.use(
-	cors({
-		origin:"http://localhost:3000",
-		credentials:true,
-	})
+	cors(corsOptions)
 );
 
 // Route configuration
