@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoute.js";    // Import routes related to a
 import categoryRoutes from "./routes/categoryRoutes.js";  // Import routes related to categories
 import cors from "cors";   // Import cors for handling Cross-Origin Resource Sharing
 import productRoutes from "./routes/productRoutes.js";   // Import routes related to products
+import bodyParser from 'body-parser';
 
 import path  from 'path'
 import { fileURLToPath } from 'url';
@@ -29,19 +30,14 @@ const app = express();
 app.use(express.json());  // Parse incoming JSON data in the request body
 app.use(morgan('dev'));   // Configure logging of HTTP requests in development mode
 
-const allowedOrigins = ['https://celadon-granita-83913d.netlify.app'];
-
-// CORS options
 const corsOptions = {
-	origin: 'https://celadon-granita-83913d.netlify.app',
-	methods: ['GET', 'POST', 'PUT', 'DELETE'],
-	allowedHeaders: ['Content-Type', 'Authorization'],
-	credentials: true
-  };
-
-app.use(
-	cors(corsOptions)
-);
+	origin: '*',
+	credentials: true,
+	optionSuccessStatus: 200
+  }
+  app.use(cors(corsOptions))
+  app.use(bodyParser.json());
+  app.use(express.urlencoded({ extended: true }));
 
 // Route configuration
 app.use('/api/v1/auth', authRoutes);   // Map authentication routes to /api/v1/auth
