@@ -169,7 +169,7 @@ const CartPage = () => {
                   )}
                 </div>
               )}
-              <div className="mt-2">
+              <div className="mt-2 mb-4">
                 {!clientToken || !auth?.token || !cart?.length ? (
                   ""
                 ) : (

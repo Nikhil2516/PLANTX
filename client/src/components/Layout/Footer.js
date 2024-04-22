@@ -16,7 +16,7 @@ const Information = [
 ];
 
 const Account = [
-  {title: "My Account", link:"/profile"},
+  {title: "My Account", link:"/dashboard/user"},
   {title: "Whishlist", link:"/cart"},
   {title: "Track Order", link:"/cart"},
 ];

@@ -1,8 +1,23 @@
 
 import productModel from '../models/productModel.js'
 import categoryModel from '../models/categoryModel.js'
+import orderModel from '../models/orderModel.js'
 import fs from 'fs'
 import slugify from 'slugify'
+import braintree from "braintree";
+import dotenv from "dotenv"
+
+dotenv.config();
+
+//payment gateway
+var gateway = new braintree.BraintreeGateway({
+    environment: braintree.Environment.Sandbox,
+    merchantId: process.env.BRAIINTREE_MERCHANR_ID,
+    publicKey: process.env.BRAINTREE_PUBLIC_KEY,
+    privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+  });
+
+
 export const createProductController = async (req, res) => {
     try {
         const { name, description, price, category, quantity, shipping } = req.fields;
@@ -325,3 +340,71 @@ export const productCategoryController = async (req, res) => {
         });
     }
 };
+
+//payment gateway api
+//token
+export const braintreeTokenController = async (req, res) => {
+    try {
+      gateway.clientToken.generate({}, function (err, response) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.send(response);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  //payment
+  export const brainTreePaymentController = async (req, res) => {
+    try {
+      const { nonce, cart } = req.body;
+      let total = 0;
+      cart.map((i) => {
+        total += i.price;
+      });
+      let newTransaction = gateway.transaction.sale(
+        {
+          amount: total,
+          paymentMethodNonce: nonce,
+          options: {
+            submitForSettlement: true,
+          },
+        },
+        async function (error, result) {
+          if (result) {
+            // Save order
+            const order = new orderModel({
+              products: cart,
+              payment: result,
+              buyer: req.user._id,
+            }).save();
+
+            console.log("Cart = ", cart);
+  
+            // Update product quantities
+            for (const item of cart) {
+              const product = await productModel.findById(item._id);
+              console.log("product = ", product);
+              if (product) {
+                // Subtract ordered quantity from available quantity
+                console.log("item quatity = ", )
+                product.quantity = item.quantity - 1;
+                
+                console.log("Product Quntity = ", product.quantity);
+                await product.save();
+              }
+            }
+  
+            res.json({ ok: true });
+          } else {
+            res.status(500).send(error);
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
