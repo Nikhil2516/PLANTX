@@ -41,8 +41,11 @@ This is an eCommerce website for selling plants, built using the MERN stack.
 
 ## Screenshot
 ### Homepage
-![Homepage](screenshot/Screenshot (129).png)
+![Homepage](screenshot/Screenshot(129).png)
+![Homepage](screenshot/Screenshot(131).png)
 
+###Cart
+![Cart](screenshot/Screenshot(133).png)
 
 ## Setup
 
