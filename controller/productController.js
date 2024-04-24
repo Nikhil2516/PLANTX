@@ -391,10 +391,11 @@ export const braintreeTokenController = async (req, res) => {
               if (product) {
                 // Subtract ordered quantity from available quantity
                 console.log("item quatity = ", )
-                product.quantity = item.quantity - 1;
+                const total = product.quantity = item.quantity - 1;
                 
                 console.log("Product Quntity = ", product.quantity);
                 await product.save();
+
               }
             }
   

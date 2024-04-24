@@ -24,6 +24,7 @@ const Products = () => {
   //lifecycle method
   useEffect(() => {
     getAllProducts();
+    console.log("products = ", products);
   }, []);
   return (
     <Layout>
@@ -49,6 +50,7 @@ const Products = () => {
                   <div className="card-body">
                     <h5 className="card-title">{p.name}</h5>
                     <p className="card-text">{p.description}</p>
+                    <p className="card-title">Quantity : {p.quantity} </p>
                   </div>
                 </div>
               </Link>
