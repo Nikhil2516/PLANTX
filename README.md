@@ -45,7 +45,7 @@ This is an eCommerce website for selling plants, built using the MERN stack.
 ## Setup
 
 1. **Clone the repository:**
-   
+   https://github.com/Nikhil2516/PLANTX.git
 2. **Install dependencies:**
      npm i -y
      npm i nodemon
