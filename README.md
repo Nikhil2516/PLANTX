@@ -40,7 +40,8 @@ This is an eCommerce website for selling plants, built using the MERN stack.
   - bcryptjs for password hashing
 
 ## Screenshot
-screenshot/Screenshot(129).png
+### Homepage
+![Homepage](screenshot/Screenshot(129).png)
 
 
 ## Setup
