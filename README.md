@@ -39,7 +39,8 @@ This is an eCommerce website for selling plants, built using the MERN stack.
   - JWT for authentication
   - bcryptjs for password hashing
 
-
+##Screenshot
+(./screenshot/Screenshot(129).png)
 
 
 ## Setup
